@@ -13,7 +13,7 @@ const sorts = [
   ...(hasPrices ? [{ v: 'price-asc', l: 'Price: low to high' }, { v: 'price-desc', l: 'Price: high to low' }] : []),
 ];
 
-export default function Equipment() {
+export default function Supplements() {
   const [params, setParams] = useSearchParams();
   const category = params.get('category') || '';
   const q = params.get('q') || '';
@@ -26,9 +26,9 @@ export default function Equipment() {
   };
 
   useSEO({
-    title: category ? `${category} Equipment` : 'Gym Equipment',
-    description: 'Browse treadmills, bikes, racks, benches, weights and machines. Filter by category, search, and enquire on WhatsApp.',
-    path: '/equipment',
+    title: category ? `${category} Supplements` : 'Gym Supplements',
+    description: 'Browse protein, creatine, pre-workout, amino acids, vitamins and more. Filter by category, search, and enquire on WhatsApp.',
+    path: '/supplements',
   });
 
   const list = useMemo(() => {
@@ -52,8 +52,8 @@ export default function Equipment() {
     <>
       <section className="pt-36 pb-12 border-b border-line knurl">
         <div className="container-x">
-          <h1 className="text-6xl sm:text-8xl lg:text-9xl">Equipment</h1>
-          <p className="mt-5 text-mute text-lg max-w-xl leading-relaxed">Cardio, strength, free weights and more. Open a product for details, or message us to buy.</p>
+          <h1 className="text-6xl sm:text-8xl lg:text-9xl">Supplements</h1>
+          <p className="mt-5 text-mute text-lg max-w-xl leading-relaxed">Protein, creatine, pre-workout, recovery and everyday wellness. Open a product for details, or message us to buy.</p>
         </div>
       </section>
 
@@ -61,9 +61,9 @@ export default function Equipment() {
         <div className="container-x">
           <div className="grid gap-4 md:grid-cols-[1fr_auto]">
             <div className="relative">
-              <label htmlFor="search" className="sr-only">Search equipment</label>
+              <label htmlFor="search" className="sr-only">Search supplements</label>
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-mute pointer-events-none" aria-hidden="true" />
-              <input id="search" type="search" value={q} onChange={(e) => set('q', e.target.value)} placeholder="Search equipment" className="field !pl-12" />
+              <input id="search" type="search" value={q} onChange={(e) => set('q', e.target.value)} placeholder="Search supplements" className="field !pl-12" />
             </div>
             <div>
               <label htmlFor="sort" className="sr-only">Sort by</label>
@@ -100,7 +100,7 @@ export default function Equipment() {
             ) : (
               <div className="border border-dashed border-line py-20 px-6 text-center">
                 <SearchX className="w-10 h-10 mx-auto text-mute" strokeWidth={1.25} />
-                <h2 className="mt-5 text-4xl">No equipment found</h2>
+                <h2 className="mt-5 text-4xl">No supplements found</h2>
                 <p className="mt-3 text-mute">Try a different search or category, or ask us — we may be able to source it.</p>
                 <button type="button" onClick={() => setParams({}, { replace: true })} className="btn-primary mt-7">Clear filters</button>
               </div>

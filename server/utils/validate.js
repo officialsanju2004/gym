@@ -14,8 +14,8 @@ export function validateContact(body = {}) {
     name: clean(body.name),
     email: clean(body.email).toLowerCase(),
     phone: clean(body.phone),
-    subject: clean(body.subject) || 'Equipment enquiry',
-    equipment: clean(body.equipment) || 'Not specified',
+    subject: clean(body.subject) || 'Supplement enquiry',
+    product: clean(body.product) || 'Not specified',
     message: clean(body.message),
   };
   const errors = {};
@@ -25,7 +25,7 @@ export function validateContact(body = {}) {
   if (!PHONE_RE.test(values.phone) || values.phone.replace(/\D/g, '').length < 7)
     errors.phone = 'Enter a valid phone number.';
   if (values.subject.length > 120) errors.subject = 'Subject must be under 120 characters.';
-  if (values.equipment.length > 120) errors.equipment = 'Equipment must be under 120 characters.';
+  if (values.product.length > 120) errors.product = 'Product must be under 120 characters.';
   if (values.message.length < 10 || values.message.length > 2000)
     errors.message = 'Message must be between 10 and 2000 characters.';
 

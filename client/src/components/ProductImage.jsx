@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Dumbbell, Bike, Footprints, Weight, Activity, Layers, Cog, Repeat, Cable } from 'lucide-react';
+import { Dumbbell, FlaskConical, Zap, Droplets, Flame, Pill, Fish, Cookie, GlassWater, Atom } from 'lucide-react';
 
 const icons = {
-  treadmill: Footprints, bike: Bike, dumbbell: Dumbbell, bench: Layers, rack: Layers, cable: Cable,
-  smith: Cog, legpress: Cog, elliptical: Activity, plates: Weight, kettlebell: Repeat, barbell: Dumbbell,
+  protein: Dumbbell, gainer: Flame, creatine: FlaskConical, preworkout: Zap, amino: Droplets,
+  glutamine: Atom, vitamin: Pill, omega: Fish, bar: Cookie, shaker: GlassWater,
 };
 
 /** Real photo if present; otherwise a designed placeholder (never a broken image). */

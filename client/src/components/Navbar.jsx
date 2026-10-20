@@ -47,7 +47,7 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden md:block">
-          <Link to="/equipment" className="btn-primary !min-h-11">Explore Equipment</Link>
+          <Link to="/supplements" className="btn-primary !min-h-11">Shop Supplements</Link>
         </div>
 
         <button
@@ -81,7 +81,7 @@ export default function Navbar() {
                 </motion.div>
               ))}
             </nav>
-            <Link to="/equipment" className="btn-primary w-full mt-8">Explore Equipment</Link>
+            <Link to="/supplements" className="btn-primary w-full mt-8">Shop Supplements</Link>
           </motion.div>
         )}
       </AnimatePresence>

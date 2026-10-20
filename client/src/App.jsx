@@ -1,12 +1,12 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { Routes, Route, useLocation } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
 import Home from './pages/Home';
 
-const Equipment = lazy(() => import('./pages/Equipment'));
+const Supplements = lazy(() => import('./pages/Supplements'));
 const ProductDetails = lazy(() => import('./pages/ProductDetails'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
@@ -39,8 +39,10 @@ export default function App() {
           <Suspense fallback={<div className="min-h-[70vh]" />}>
             <Routes location={location}>
               <Route path="/" element={<Home />} />
-              <Route path="/equipment" element={<Equipment />} />
-              <Route path="/equipment/:slug" element={<ProductDetails />} />
+              <Route path="/supplements" element={<Supplements />} />
+              <Route path="/supplements/:slug" element={<ProductDetails />} />
+              {/* Old links from the previous catalogue */}
+              <Route path="/equipment/*" element={<Navigate to="/supplements" replace />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="*" element={<NotFound />} />

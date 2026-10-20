@@ -13,7 +13,7 @@ import NotFound from './NotFound';
 function Details({ product }) {
   const [active, setActive] = useState(0);
   const [variant, setVariant] = useState(product.variants[0] || '');
-  useSEO({ title: product.name, description: product.shortDescription, path: `/equipment/${product.slug}` });
+  useSEO({ title: product.name, description: product.shortDescription, path: `/supplements/${product.slug}` });
 
   const buy = () => buyProduct(variant ? { ...product, name: `${product.name} (${variant})` } : product);
   const rel = relatedProducts(product);
@@ -21,7 +21,7 @@ function Details({ product }) {
   return (
     <>
       <div className="container-x pt-28 pb-24">
-        <Link to="/equipment" className="inline-flex items-center gap-1 text-mute hover:text-lime min-h-11"><ChevronLeft className="w-4 h-4" /> All equipment</Link>
+        <Link to="/supplements" className="inline-flex items-center gap-1 text-mute hover:text-lime min-h-11"><ChevronLeft className="w-4 h-4" /> All supplements</Link>
 
         <div className="mt-4 grid gap-10 lg:grid-cols-[1.15fr_1fr] lg:gap-16">
           <div>
@@ -53,7 +53,7 @@ function Details({ product }) {
 
             {product.variants.length > 0 && (
               <fieldset className="mt-7">
-                <legend className="label">Variant</legend>
+                <legend className="label">{product.variantLabel}</legend>
                 <div className="flex flex-wrap gap-2">
                   {product.variants.map((v) => (
                     <button key={v} type="button" aria-pressed={variant === v} onClick={() => setVariant(v)}
@@ -78,20 +78,25 @@ function Details({ product }) {
             </ul>
           </section>
           <section aria-labelledby="spec">
-            <h2 id="spec" className="text-4xl">Specifications</h2>
+            <h2 id="spec" className="text-4xl">Product details</h2>
             <dl className="mt-6 divide-y divide-line border-y border-line">
               {Object.entries(product.specifications).map(([k, v]) => (
                 <div key={k} className="flex justify-between gap-6 py-4"><dt className="text-mute">{k}</dt><dd className="font-semibold text-right">{v}</dd></div>
               ))}
             </dl>
             {product.specsAreSample && (
-              <p className="mt-4 flex gap-2 text-sm text-mute"><Info className="w-4 h-4 shrink-0 mt-0.5" /> Sample figures for illustration. Ask us for confirmed specifications before you buy.</p>
+              <p className="mt-4 flex gap-2 text-sm text-mute"><Info className="w-4 h-4 shrink-0 mt-0.5" /> Sample details for illustration. Check the product label, or ask us for the confirmed ingredients and nutrition facts, before you buy.</p>
             )}
           </section>
         </div>
 
-        <section className="mt-24" aria-labelledby="rel">
-          <h2 id="rel" className="text-5xl">Related equipment</h2>
+        <p className="mt-16 flex gap-2 text-sm text-mute max-w-3xl">
+          <Info className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />
+          Supplements are not a substitute for a varied diet or medical advice. Read the label before use, and speak to a doctor or pharmacist first if you are pregnant, breastfeeding, under 18, on medication or have a medical condition.
+        </p>
+
+        <section className="mt-16" aria-labelledby="rel">
+          <h2 id="rel" className="text-5xl">Related products</h2>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {rel.map((p, i) => <ProductCard key={p.id} product={p} index={i} />)}
           </div>

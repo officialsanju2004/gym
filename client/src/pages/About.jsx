@@ -1,28 +1,28 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight, Home, Dumbbell, Users, Building2, Landmark, Target, Eye, Handshake, ShieldCheck, Wrench, Lightbulb } from 'lucide-react';
+import { ArrowRight, Sprout, Dumbbell, Users, Building2, Trophy, Target, Eye, Handshake, ShieldCheck, Gem, Lightbulb } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import Reveal from '../components/Reveal';
-import PlateArt from '../components/PlateArt';
+import TubArt from '../components/TubArt';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { site } from '../config/site';
 import { useSEO } from '../hooks/useSEO';
 import { openWhatsApp, generalMessage } from '../utils/whatsapp';
 
 const approach = [
-  ['Equipment selection', 'We compare options by frame, finish and how they feel in use, then recommend what suits your space.'],
-  ['Product quality', 'We look for sturdy construction and components that cope with regular training.'],
+  ['Product selection', 'We compare products by formulation, label transparency and brand reputation, then recommend what suits your goal.'],
+  ['Product quality', 'We look for clearly labelled products from brands we can stand behind.'],
   ['Customer assistance', 'Ask us anything before you buy. We reply to enquiries on WhatsApp and by email.'],
-  ['Home and commercial needs', 'A home setup and a facility have different demands. We plan for both.'],
+  ['Every kind of trainee', 'A first-timer and a competitive lifter need different things. We help with both.'],
 ];
 const serve = [
-  [Home, 'Home gym owners'], [Dumbbell, 'Fitness enthusiasts'], [Users, 'Personal training studios'],
-  [Building2, 'Commercial gyms'], [Landmark, 'Fitness facilities'],
+  [Sprout, 'Beginners'], [Dumbbell, 'Regular lifters'], [Trophy, 'Athletes'],
+  [Users, 'Trainers and coaches'], [Building2, 'Gyms and studios'],
 ];
 const values = [
   [ShieldCheck, 'Honesty', 'Clear answers on what we can supply and what it costs.'],
-  [Wrench, 'Durability', 'Equipment meant to be used hard, for years.'],
+  [Gem, 'Quality', 'Products we would be comfortable using ourselves.'],
   [Handshake, 'Service', 'Help that continues after the enquiry.'],
-  [Lightbulb, 'Fit', 'The right equipment for the room, not the biggest.'],
+  [Lightbulb, 'Fit', 'The right product for your goal, not the most expensive one.'],
 ];
 
 export default function About() {
@@ -30,10 +30,10 @@ export default function About() {
   return (
     <>
       <section className="relative pt-40 pb-24 overflow-hidden knurl">
-        <PlateArt className="absolute -right-24 top-10 w-[420px] opacity-25 sm:opacity-60 hidden sm:block" />
+        <TubArt className="absolute -right-24 top-10 w-[420px] opacity-25 sm:opacity-60 hidden sm:block" />
         <div className="container-x relative">
-          <h1 className="text-6xl sm:text-8xl lg:text-[9.5rem] max-w-5xl">Equipment worth training on.</h1>
-          <p className="mt-8 text-mute text-lg max-w-xl leading-relaxed">{site.brand} supplies gym equipment to people and facilities who take training seriously.</p>
+          <h1 className="text-6xl sm:text-8xl lg:text-[9.5rem] max-w-5xl">Fuel worth training on.</h1>
+          <p className="mt-8 text-mute text-lg max-w-xl leading-relaxed">{site.brand} supplies gym supplements to people and gyms who take training seriously.</p>
         </div>
       </section>
 
@@ -51,12 +51,12 @@ export default function About() {
           <Reveal className="py-16 md:pr-14 md:border-r border-line">
             <Target className="w-8 h-8 text-lime" strokeWidth={1.5} />
             <h2 className="mt-5 text-5xl">Mission</h2>
-            <p className="mt-4 text-mute leading-relaxed">To put dependable training equipment in more homes and facilities, and make choosing it straightforward.</p>
+            <p className="mt-4 text-mute leading-relaxed">To make good sports nutrition easy to find and easy to choose, for everyone from first-time gym-goers to serious athletes.</p>
           </Reveal>
           <Reveal delay={0.08} className="py-16 md:pl-14 border-t md:border-t-0 border-line">
             <Eye className="w-8 h-8 text-lime" strokeWidth={1.5} />
             <h2 className="mt-5 text-5xl">Vision</h2>
-            <p className="mt-4 text-mute leading-relaxed">To be the first name people think of when they are building or upgrading a gym.</p>
+            <p className="mt-4 text-mute leading-relaxed">To be the first name people think of when they want honest advice on supplements.</p>
           </Reveal>
         </div>
       </section>
@@ -107,9 +107,9 @@ export default function About() {
       <section className="pb-8">
         <Reveal className="container-x">
           <div className="bg-lime text-black p-8 sm:p-14 flex flex-wrap items-center justify-between gap-8">
-            <h2 className="text-5xl sm:text-7xl max-w-xl">Ready to equip your space?</h2>
+            <h2 className="text-5xl sm:text-7xl max-w-xl">Ready to fuel your training?</h2>
             <div className="flex flex-wrap gap-3">
-              <Link to="/equipment" className="btn bg-black text-white hover:bg-white hover:text-black">Equipment <ArrowRight className="w-4 h-4" /></Link>
+              <Link to="/supplements" className="btn bg-black text-white hover:bg-white hover:text-black">Supplements <ArrowRight className="w-4 h-4" /></Link>
               <Link to="/contact" className="btn border border-black/40 hover:bg-black hover:text-white">Contact</Link>
               <button type="button" onClick={() => openWhatsApp(generalMessage())} className="btn bg-wa text-black hover:bg-white"><WhatsAppIcon className="w-5 h-5" /> WhatsApp</button>
             </div>

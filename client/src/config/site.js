@@ -2,7 +2,7 @@
 // Everything marked REPLACE is a placeholder. Do not ship placeholders.
 export const site = {
   brand: 'IRONFORM', // REPLACE with the real brand name
-  tagline: 'Premium gym equipment for serious training spaces.',
+  tagline: 'Sports nutrition and everyday supplements for people who train.',
   // Digits only, international format. Set VITE_WHATSAPP_NUMBER in client/.env
   whatsappNumber: import.meta.env.VITE_WHATSAPP_NUMBER || '919876543210', // REPLACE
   contact: {
@@ -19,14 +19,14 @@ export const site = {
   ],
   // Story copy for the About page. REPLACE with the business's real story.
   story: [
-    'We help people equip the spaces where they train. From a corner of a home garage to a full commercial floor, we match the right equipment to the room, the budget and the goal.',
-    'Every product in our catalogue is chosen for how it feels under load and how it holds up to daily use. When you are not sure what fits, our team helps you work it out before you buy.',
+    'We help people fuel the way they train. Whether you are just starting out or lifting every day, we help you find the right supplements for your goal and your budget.',
+    'Every product in our catalogue is chosen for its formulation, label transparency and the reputation of the brand behind it. When you are not sure what fits, our team helps you work it out before you buy.',
   ],
 };
 
 export const nav = [
   { to: '/', label: 'Home' },
-  { to: '/equipment', label: 'Equipment' },
+  { to: '/supplements', label: 'Supplements' },
   { to: '/about', label: 'About Us' },
   { to: '/contact', label: 'Contact' },
 ];

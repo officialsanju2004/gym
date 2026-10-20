@@ -1,11 +1,12 @@
-# Gym Equipment Website (React + Express)
+# Gym Supplements Website (React + Express)
 
-Multi-page premium gym equipment showcase. Home, Equipment (filter / search / sort), product pages (`/equipment/:slug`), About, Contact. "Buy Now" and the floating button open WhatsApp; both contact forms email the owner's Gmail through the Express API.
+Multi-page gym supplements showcase. Home, Supplements (filter / search / sort), product pages (`/supplements/:slug`), About, Contact. Old `/equipment/...` links redirect to `/supplements`. "Buy Now" and the floating button open WhatsApp; both contact forms email the owner's Gmail through the Express API.
 
 ## Status — read first
 - Backend validation, rate limiting and error handling were tested locally. **Gmail delivery has NOT been tested** — it needs your credentials. Follow "Test email delivery" below before launch.
 - No product photos are bundled. Until you add them, a designed placeholder shows (no broken images).
-- Product specs are **sample data** (flagged in the UI). Prices are "Request a quote". Replace in `client/src/data/products.js`.
+- Product details are **sample data** (flagged in the UI). Prices are "Request a quote". Replace with the real label info (nutrition facts, ingredients, pack sizes) in `client/src/data/products.js`.
+- Check the claims on the Home page ("Genuine products", "Transparent labels") are true for your business, and that your supplements meet the labelling and licensing rules where you sell (e.g. FSSAI in India).
 - The UI has not been checked in a real browser/device matrix yet. Run the checklist below.
 
 ## Quick start
@@ -24,7 +25,7 @@ npm install && npm run dev            # http://localhost:5173  (/api is proxied 
 |---|---|
 | Brand name, tagline, story, phone/email/hours/address, testimonials | `client/src/config/site.js` |
 | WhatsApp number (digits only, e.g. `919876543210`) | `client/.env` → `VITE_WHATSAPP_NUMBER` |
-| Products, prices, verified specs | `client/src/data/products.js` |
+| Products, prices, verified label details | `client/src/data/products.js` |
 | Product photos | `client/public/images/products/<slug>.jpg` and optional `<slug>-2.jpg` |
 | Production URL for canonical/OG | `client/.env` → `VITE_SITE_URL`; update `public/robots.txt` and add a sitemap |
 
@@ -52,8 +53,8 @@ Expect `{"success":true,...}` and an email in `CONTACT_RECEIVER` (check Spam onc
 
 ## Testing checklist
 - [ ] Navbar, footer and mobile menu links work; every route loads when opened directly
-- [ ] Category tiles on Home open Equipment with the right filter; filter, search, sort, clear, empty state
-- [ ] Each `/equipment/:slug` loads the right product; unknown slug shows 404
+- [ ] Category tiles on Home open Supplements with the right filter; filter, search, sort, clear, empty state
+- [ ] Each `/supplements/:slug` loads the right product; unknown slug shows 404; `/equipment` redirects
 - [ ] Buy Now (cards + details, with variant) opens WhatsApp with that product's name in the message
 - [ ] Floating WhatsApp button works on every page and doesn't cover form buttons on mobile
 - [ ] Both forms: invalid input blocked, loading state, success message, server-error message, no double submit

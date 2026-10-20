@@ -22,14 +22,14 @@ function Field({ id, label, error, required = true, children }) {
 }
 
 /**
- * variant="home": Name, Email, Phone, Equipment of Interest (product), Message
- * variant="page": adds Subject and uses Equipment Category
+ * variant="home": Name, Email, Phone, Product of Interest, Message
+ * variant="page": adds Subject and uses Product Category
  */
 export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
   const isPage = variant === 'page';
   const {
     register, handleSubmit, reset, setError, formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: { name: '', email: '', phone: '', subject: '', equipment: '', message: '', website: '' } });
+  } = useForm({ defaultValues: { name: '', email: '', phone: '', subject: '', product: '', message: '', website: '' } });
   const [status, setStatus] = useState({ type: 'idle', text: '' }); // idle | success | error
   const lock = useRef(false); // synchronous guard against double submits
 
@@ -89,15 +89,15 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
             })} />
         </Field>
         {isPage ? (
-          <Field id={id('equipment')} label="Equipment category" required={false} error={errors.equipment?.message}>
-            <select id={id('equipment')} className="field" {...register('equipment')}>
+          <Field id={id('product')} label="Product category" required={false} error={errors.product?.message}>
+            <select id={id('product')} className="field" {...register('product')}>
               <option value="">Not sure yet</option>
               {categories.map((c) => <option key={c} value={c}>{c}</option>)}
             </select>
           </Field>
         ) : (
-          <Field id={id('equipment')} label="Equipment of interest" required={false} error={errors.equipment?.message}>
-            <select id={id('equipment')} className="field" {...register('equipment')}>
+          <Field id={id('product')} label="Product of interest" required={false} error={errors.product?.message}>
+            <select id={id('product')} className="field" {...register('product')}>
               <option value="">Not sure yet</option>
               {products.map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
             </select>
@@ -113,7 +113,7 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
       )}
 
       <Field id={id('message')} label="Message" error={errors.message?.message}>
-        <textarea id={id('message')} rows={5} className="field py-3 resize-y" placeholder="Tell us about your space, goals and the equipment you need." {...aria('message')}
+        <textarea id={id('message')} rows={5} className="field py-3 resize-y" placeholder="Tell us about your goals and the products you are interested in." {...aria('message')}
           {...register('message', {
             required: 'Tell us how we can help.',
             minLength: { value: 10, message: 'Please write at least 10 characters.' },

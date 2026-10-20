@@ -26,10 +26,10 @@ export default function Footer() {
         </nav>
 
         <div>
-          <h2 className="text-xl mb-4 text-white">Equipment</h2>
+          <h2 className="text-xl mb-4 text-white">Supplements</h2>
           <ul className="space-y-3">
-            {categories.slice(0, 5).map((c) => (
-              <li key={c}><Link className="text-mute hover:text-lime transition-colors" to={`/equipment?category=${encodeURIComponent(c)}`}>{c}</Link></li>
+            {categories.slice(0, 6).map((c) => (
+              <li key={c}><Link className="text-mute hover:text-lime transition-colors" to={`/supplements?category=${encodeURIComponent(c)}`}>{c}</Link></li>
             ))}
           </ul>
         </div>
@@ -53,6 +53,9 @@ export default function Footer() {
         <div className="container-x py-6 text-sm text-mute flex flex-wrap justify-between gap-2">
           <p>© {new Date().getFullYear()} {site.brand}. All rights reserved.</p>
           <p>Prices and availability confirmed on enquiry.</p>
+        </div>
+        <div className="container-x pb-8 text-xs text-mute/80 leading-relaxed">
+          <p>Supplements are not a substitute for a varied diet or for medical advice. Always read the label, and speak to a doctor or pharmacist before use if you are pregnant, breastfeeding, under 18, on medication or have a medical condition.</p>
         </div>
       </div>
     </footer>

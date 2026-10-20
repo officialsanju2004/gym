@@ -7,7 +7,7 @@ import { useSEO } from '../hooks/useSEO';
 import { openWhatsApp, generalMessage } from '../utils/whatsapp';
 
 export default function Contact() {
-  useSEO({ title: 'Contact Us', description: `Contact ${site.brand} to enquire about gym equipment. Message us on WhatsApp or send the form.`, path: '/contact' });
+  useSEO({ title: 'Contact Us', description: `Contact ${site.brand} to enquire about supplements. Message us on WhatsApp or send the form.`, path: '/contact' });
   const { phone, email, hours, address } = site.contact;
   const rows = [
     phone && { Icon: Phone, label: 'Phone', value: phone, href: `tel:${phone.replace(/\s/g, '')}` },
@@ -20,8 +20,8 @@ export default function Contact() {
     <>
       <section className="pt-40 pb-16 knurl border-b border-line">
         <div className="container-x">
-          <h1 className="text-6xl sm:text-8xl lg:text-[9.5rem]">Let’s build your gym.</h1>
-          <p className="mt-6 text-mute text-lg max-w-xl leading-relaxed">Tell us about your space and what you want to train. We will reply with options.</p>
+          <h1 className="text-6xl sm:text-8xl lg:text-[9.5rem]">Let’s find your fit.</h1>
+          <p className="mt-6 text-mute text-lg max-w-xl leading-relaxed">Tell us what you are training for and which products you are looking at. We will reply with options.</p>
         </div>
       </section>
 

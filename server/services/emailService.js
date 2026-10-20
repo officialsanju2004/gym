@@ -31,7 +31,7 @@ export async function sendContactEmail(data) {
       <h2 style="margin:0 0 12px">New website enquiry</h2>
       <table style="border-collapse:collapse;width:100%;border:1px solid #e5e5e5">
         ${row('Name', data.name)}${row('Email', data.email)}${row('Phone', data.phone)}
-        ${row('Equipment', data.equipment)}${row('Subject', data.subject)}${row('Submitted', submittedAt)}
+        ${row('Product', data.product)}${row('Subject', data.subject)}${row('Submitted', submittedAt)}
       </table>
       <h3 style="margin:20px 0 6px">Message</h3>
       <p style="white-space:pre-wrap;line-height:1.5;margin:0">${escapeHtml(data.message)}</p>
@@ -42,7 +42,7 @@ export async function sendContactEmail(data) {
     `Name: ${data.name}`,
     `Email: ${data.email}`,
     `Phone: ${data.phone}`,
-    `Equipment: ${data.equipment}`,
+    `Product: ${data.product}`,
     `Subject: ${data.subject}`,
     `Submitted: ${submittedAt}`,
     '',
