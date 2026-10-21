@@ -1,13 +1,12 @@
-# Gym Supplements Website (React + Express)
+# Punjabi Tadka Nutrition — Website (React + Express)
 
-Multi-page gym supplements showcase. Home, Supplements (filter / search / sort), product pages (`/supplements/:slug`), About, Contact. Old `/equipment/...` links redirect to `/supplements`. "Buy Now" and the floating button open WhatsApp; both contact forms email the owner's Gmail through the Express API.
+Multi-page supplements showcase for **Punjabi Tadka Nutrition, Kaccha Zira Road, Near Dana Mandi, Ferozepur City, Pin 152002 · Ph/WhatsApp 98418-00004**. Home, Supplements (filter / search / sort), product pages (`/supplements/:slug`), About, Contact (with map). "Buy Now" and the floating button open WhatsApp; both contact forms email the owner's Gmail through the Express API.
 
 ## Status — read first
-- Backend validation, rate limiting and error handling were tested locally. **Gmail delivery has NOT been tested** — it needs your credentials. Follow "Test email delivery" below before launch.
-- No product photos are bundled. Until you add them, a designed placeholder shows (no broken images).
-- Product details are **sample data** (flagged in the UI). Prices are "Request a quote". Replace with the real label info (nutrition facts, ingredients, pack sizes) in `client/src/data/products.js`.
-- Check the claims on the Home page ("Genuine products", "Transparent labels") are true for your business, and that your supplements meet the labelling and licensing rules where you sell (e.g. FSSAI in India).
-- The UI has not been checked in a real browser/device matrix yet. Run the checklist below.
+- All 91 products from the shop price list are in `client/src/data/products.js` with MRP and retail price. The dealing (trade) price is stored but **hidden from customers** (`SHOW_DEALER_PRICE = false`).
+- 3 products have no price in the list (Schinoussa 1kg, Army1 Omega, MyoGenetix Massive High Calorie Gainer): they show "Ask for price".
+- Product pictures: each product shows a generated pack illustration in the brand colours. To show a real photo, add URL(s) to that product's `images` array or put files in `client/public/images/products/<slug>.jpg` and list them in `images`. If an image fails to load, the illustration is shown.
+- Backend validation, rate limiting and error handling were tested locally. **Gmail delivery has NOT been tested** — follow "Test email delivery" below before launch.
 
 ## Quick start
 ```bash
@@ -24,9 +23,9 @@ npm install && npm run dev            # http://localhost:5173  (/api is proxied 
 | What | Where |
 |---|---|
 | Brand name, tagline, story, phone/email/hours/address, testimonials | `client/src/config/site.js` |
-| WhatsApp number (digits only, e.g. `919876543210`) | `client/.env` → `VITE_WHATSAPP_NUMBER` |
-| Products, prices, verified label details | `client/src/data/products.js` |
-| Product photos | `client/public/images/products/<slug>.jpg` and optional `<slug>-2.jpg` |
+| Logo and favicon | `client/public/images/logo-*.jpg`, `client/public/favicon-64.png`, `apple-touch-icon.png` |
+| WhatsApp number (digits only — `919841800004`; defaults to this if unset) | `client/.env` → `VITE_WHATSAPP_NUMBER` |
+| Products and prices (from the price list) | `client/src/data/products.js` |
 | Production URL for canonical/OG | `client/.env` → `VITE_SITE_URL`; update `public/robots.txt` and add a sitemap |
 
 Contact details left empty in `site.js` are simply hidden — nothing is invented. Testimonials render only when you add real ones.

@@ -1,12 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #090909;
-  --color-coal: #141414;
-  --color-steel: #1d1d1d;
-  --color-lime: #c6ff00;
+  --color-ink: #000000;
+  --color-coal: #0e0b0b;
+  --color-steel: #181313;
+  --color-gold: #f5b642;
+  --color-gold-deep: #c98a1b;
+  --color-flame: #e5090b;
   --color-mute: #a3a3a3;
-  --color-line: #292929;
+  --color-line: #2a2321;
   --color-wa: #25d366;
   --font-display: "Big Shoulders Display", "Arial Narrow", sans-serif;
   --font-sans: "Manrope", system-ui, sans-serif;
@@ -16,8 +18,8 @@
   html { scroll-behavior: smooth; background: var(--color-ink); }
   body { @apply bg-ink text-white font-sans antialiased; overflow-x: hidden; }
   h1, h2, h3 { @apply font-display font-extrabold uppercase tracking-tight; line-height: 0.92; }
-  :focus-visible { outline: 2px solid var(--color-lime); outline-offset: 3px; }
-  ::selection { background: var(--color-lime); color: #000; }
+  :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; }
+  ::selection { background: var(--color-flame); color: #fff; }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
@@ -26,16 +28,20 @@
 
 @utility container-x { @apply mx-auto w-full max-w-[1320px] px-5 sm:px-8 lg:px-12; }
 @utility btn { @apply inline-flex items-center justify-center gap-2 px-6 min-h-12 font-bold text-sm tracking-wide transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed; }
-@utility btn-primary { @apply btn bg-lime text-black hover:bg-white; }
-@utility btn-ghost { @apply btn border border-white/30 text-white hover:border-lime hover:text-lime; }
+@utility btn-primary { @apply btn bg-gold text-black hover:bg-white; }
+@utility btn-ghost { @apply btn border border-white/30 text-white hover:border-gold hover:text-gold; }
+@utility btn-flame { @apply btn bg-flame text-white hover:bg-white hover:text-black; }
 @utility btn-wa { @apply btn bg-wa text-black hover:bg-white; }
-@utility field { @apply w-full bg-coal border border-line px-4 min-h-12 text-white placeholder:text-mute/70 transition-colors focus:border-lime focus:outline-none; }
+@utility field { @apply w-full bg-coal border border-line px-4 min-h-12 text-white placeholder:text-mute/70 transition-colors focus:border-gold focus:outline-none; }
   .field[aria-invalid="true"] { border-color: #ff5a5a; }
 @utility label { @apply block text-sm font-semibold mb-2; }
 @utility err { @apply text-sm mt-1.5; color: #ff8a8a; }
   /* Knurled hatch used as a recurring brand texture */
 @utility knurl {
-    background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 7px),
-      repeating-linear-gradient(-45deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 7px);
+    background-image: repeating-linear-gradient(45deg, rgba(245,182,66,0.06) 0 1px, transparent 1px 7px),
+      repeating-linear-gradient(-45deg, rgba(245,182,66,0.06) 0 1px, transparent 1px 7px);
   }
 
+
+/* Logo artwork has a black background: "screen" makes it merge into the page background */
+.logo-blend { mix-blend-mode: screen; }

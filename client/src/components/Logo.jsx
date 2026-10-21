@@ -1,14 +1,24 @@
 import { site } from '../config/site';
 
-export default function Logo({ className = '' }) {
+/** Compact logo for the navbar / footer: emblem image + wordmark. */
+export default function Logo({ className = '', size = 'h-12 sm:h-14', showText = true }) {
   return (
-    <span className={`inline-flex items-center gap-2.5 ${className}`}>
-      <svg viewBox="0 0 24 24" className="w-6 h-6" aria-hidden="true">
-        <rect x="5" y="1" width="14" height="4" fill="#fff" />
-        <rect x="4" y="6" width="16" height="17" fill="#C6FF00" />
-        <rect x="4" y="11" width="16" height="6" fill="#090909" />
-      </svg>
-      <span className="font-display font-black text-2xl tracking-wide leading-none">{site.brand}</span>
+    <span className={`inline-flex items-center gap-3 ${className}`}>
+      <img
+        src="/images/logo-240.jpg"
+        srcSet="/images/logo-240.jpg 240w, /images/logo-480.jpg 480w"
+        sizes="64px"
+        alt={`${site.brand} logo`}
+        width="240"
+        height="226"
+        className={`logo-blend ${size} w-auto`}
+      />
+      {showText && (
+        <span className="hidden min-[360px]:block font-display font-black leading-[0.85] tracking-wide">
+          <span className="block text-xl sm:text-2xl text-gold">PUNJABI</span>
+          <span className="block text-xl sm:text-2xl text-flame">TADKA</span>
+        </span>
+      )}
     </span>
   );
 }

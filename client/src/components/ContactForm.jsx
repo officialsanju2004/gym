@@ -13,7 +13,7 @@ function Field({ id, label, error, required = true, children }) {
   return (
     <div>
       <label htmlFor={id} className="label">
-        {label} {required ? <span className="text-lime" aria-hidden="true">*</span> : <span className="text-mute font-normal">(optional)</span>}
+        {label} {required ? <span className="text-flame" aria-hidden="true">*</span> : <span className="text-mute font-normal">(optional)</span>}
       </label>
       {children}
       {error && <p id={`${id}-err`} role="alert" className="err">{error}</p>}
@@ -82,7 +82,7 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
             {...register('email', { required: 'Enter your email address.', pattern: { value: EMAIL_RE, message: 'Enter a valid email, like name@example.com.' } })} />
         </Field>
         <Field id={id('phone')} label="Phone number" error={errors.phone?.message}>
-          <input id={id('phone')} type="tel" inputMode="tel" autoComplete="tel" className="field" placeholder="+91 98765 43210" {...aria('phone')}
+          <input id={id('phone')} type="tel" inputMode="tel" autoComplete="tel" className="field" placeholder="10-digit mobile number" {...aria('phone')}
             {...register('phone', {
               required: 'Enter your phone number.',
               validate: (v) => (PHONE_RE.test(v) && v.replace(/\D/g, '').length >= 7) || 'Enter a valid phone number (7–15 digits).',
@@ -99,7 +99,11 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
           <Field id={id('product')} label="Product of interest" required={false} error={errors.product?.message}>
             <select id={id('product')} className="field" {...register('product')}>
               <option value="">Not sure yet</option>
-              {products.map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
+              {categories.map((c) => (
+                <optgroup key={c} label={c}>
+                  {products.filter((p) => p.category === c).map((p) => <option key={p.id} value={p.name}>{p.name}</option>)}
+                </optgroup>
+              ))}
             </select>
           </Field>
         )}
@@ -128,7 +132,7 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
       <div aria-live="polite" className="min-h-6">
         <AnimatePresence mode="wait">
           {status.type === 'success' && (
-            <motion.p key="ok" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex items-start gap-2 text-lime">
+            <motion.p key="ok" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }} className="flex items-start gap-2 text-gold">
               <CheckCircle2 className="w-5 h-5 shrink-0 mt-0.5" /> {status.text} We will get back to you soon.
             </motion.p>
           )}

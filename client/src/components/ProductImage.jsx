@@ -1,26 +1,15 @@
 import { useState } from 'react';
-import { Dumbbell, FlaskConical, Zap, Droplets, Flame, Pill, Fish, Cookie, GlassWater, Atom } from 'lucide-react';
+import ProductArt from './ProductArt';
 
-const icons = {
-  protein: Dumbbell, gainer: Flame, creatine: FlaskConical, preworkout: Zap, amino: Droplets,
-  glutamine: Atom, vitamin: Pill, omega: Fish, bar: Cookie, shaker: GlassWater,
-};
-
-/** Real photo if present; otherwise a designed placeholder (never a broken image). */
-export default function ProductImage({ product, src, className = '', eager = false, iconSize = 'w-16 h-16' }) {
+/**
+ * Real photo when the product has one (product.images or the `src` prop);
+ * otherwise (or if it fails to load) the generated pack illustration. Never a broken image.
+ */
+export default function ProductImage({ product, src, className = '', eager = false, bare = false }) {
   const [failed, setFailed] = useState(false);
-  const Icon = icons[product.icon] || Dumbbell;
-  const url = src || product.images[0];
+  const url = src || product.images?.[0];
 
-  if (failed) {
-    return (
-      <div role="img" aria-label={`${product.name} (photo coming soon)`} className={`relative overflow-hidden bg-steel knurl grid place-items-center ${className}`}>
-        <div className="absolute -right-1/4 -bottom-1/3 w-[85%] aspect-square rounded-full border-[14px] border-white/[0.04]" />
-        <div className="absolute -right-[10%] -bottom-[18%] w-[55%] aspect-square rounded-full border-[8px] border-lime/10" />
-        <Icon className={`${iconSize} text-lime/80 relative`} strokeWidth={1.25} aria-hidden="true" />
-      </div>
-    );
-  }
+  if (!url || failed) return <ProductArt product={product} bare={bare} className={`${bare ? '' : 'bg-black'} ${className}`} />;
   return (
     <img
       src={url}

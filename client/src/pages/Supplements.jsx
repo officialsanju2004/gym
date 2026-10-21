@@ -1,11 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Search, X, SearchX } from 'lucide-react';
+import { Search, X, SearchX, Info, ChevronDown } from 'lucide-react';
 import ProductGrid from '../components/ProductGrid';
-import { products, categories } from '../data/products';
+import { products, categories, countByCategory, PRICE_NOTE, PREWORKOUT_NOTE } from '../data/products';
 import { useSEO } from '../hooks/useSEO';
 
-const hasPrices = products.some((p) => p.priceType === 'fixed' && p.price != null);
+const hasPrices = true;
+const PAGE = 24;
 const sorts = [
   { v: 'featured', l: 'Featured' },
   { v: 'name-asc', l: 'Name: A–Z' },
@@ -19,7 +20,9 @@ export default function Supplements() {
   const q = params.get('q') || '';
   const sort = params.get('sort') || 'featured';
 
+  const [limit, setLimit] = useState(PAGE);
   const set = (k, v) => {
+    setLimit(PAGE);
     const next = new URLSearchParams(params);
     if (v) next.set(k, v); else next.delete(k);
     setParams(next, { replace: true });
@@ -27,18 +30,19 @@ export default function Supplements() {
 
   useSEO({
     title: category ? `${category} Supplements` : 'Gym Supplements',
-    description: 'Browse protein, creatine, pre-workout, amino acids, vitamins and more. Filter by category, search, and enquire on WhatsApp.',
+    description: `Browse all ${products.length} products at Punjabi Tadka Nutrition, Ferozepur: protein, creatine, pre-workout, gainers, amino acids, vitamins and oats, with prices.`,
     path: '/supplements',
   });
 
   const list = useMemo(() => {
     const term = q.trim().toLowerCase();
     let out = products.filter((p) => {
-      const inCat = !category || p.category === category || p.segments.includes(category);
-      const inText = !term || [p.name, p.category, p.shortDescription, p.description].join(' ').toLowerCase().includes(term);
+      const inCat = !category || p.category === category;
+      const inText = !term || [p.name, p.category, p.imported ? 'imported' : ''].join(' ').toLowerCase().includes(term);
       return inCat && inText;
     });
     const priced = (p) => (p.price == null ? Infinity : p.price);
+    if (sort === 'featured') out = [...out].sort((a, b) => Number(b.featured) - Number(a.featured));
     if (sort === 'name-asc') out = [...out].sort((a, b) => a.name.localeCompare(b.name));
     if (sort === 'name-desc') out = [...out].sort((a, b) => b.name.localeCompare(a.name));
     if (sort === 'price-asc') out = [...out].sort((a, b) => priced(a) - priced(b));
@@ -53,7 +57,7 @@ export default function Supplements() {
       <section className="pt-36 pb-12 border-b border-line knurl">
         <div className="container-x">
           <h1 className="text-6xl sm:text-8xl lg:text-9xl">Supplements</h1>
-          <p className="mt-5 text-mute text-lg max-w-xl leading-relaxed">Protein, creatine, pre-workout, recovery and everyday wellness. Open a product for details, or message us to buy.</p>
+          <p className="mt-5 text-mute text-lg max-w-xl leading-relaxed">All {products.length} products from our price list: protein, gainers, creatine, pre-workout, amino acids, vitamins and oats. Open a product for details, or message us to buy.</p>
         </div>
       </section>
 
@@ -78,25 +82,39 @@ export default function Supplements() {
               const active = category === c;
               return (
                 <button key={c || 'all'} type="button" aria-pressed={active} onClick={() => set('category', c)}
-                  className={`shrink-0 min-h-11 px-4 text-sm font-semibold border transition-colors ${active ? 'bg-lime text-black border-lime' : 'border-line text-mute hover:text-white hover:border-white/40'}`}>
-                  {c || 'All'}
+                  className={`shrink-0 min-h-11 px-4 text-sm font-semibold border transition-colors ${active ? 'bg-gold text-black border-gold' : 'border-line text-mute hover:text-white hover:border-white/40'}`}>
+                  {c || 'All'} <span className={active ? 'text-black/60' : 'text-mute/60'}>{c ? countByCategory[c] : products.length}</span>
                 </button>
               );
             })}
           </div>
 
           <div className="mt-6 flex items-center justify-between gap-4 text-sm text-mute" aria-live="polite">
-            <p>{list.length} {list.length === 1 ? 'product' : 'products'}</p>
+            <p>Showing {Math.min(limit, list.length)} of {list.length} {list.length === 1 ? 'product' : 'products'}</p>
             {filtered && (
-              <button type="button" onClick={() => setParams({}, { replace: true })} className="inline-flex items-center gap-1.5 text-white hover:text-lime">
+              <button type="button" onClick={() => setParams({}, { replace: true })} className="inline-flex items-center gap-1.5 text-white hover:text-gold">
                 <X className="w-4 h-4" /> Clear filters
               </button>
             )}
           </div>
 
+          <p className="mt-4 flex gap-2 text-sm text-mute"><Info className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />{PRICE_NOTE}</p>
+          {(!category || category === 'Pre-Workout') && (
+            <p className="mt-2 flex gap-2 text-sm text-gold"><Info className="w-4 h-4 shrink-0 mt-0.5" aria-hidden="true" />{PREWORKOUT_NOTE}</p>
+          )}
+
           <div className="mt-6">
             {list.length ? (
-              <ProductGrid products={list} />
+              <>
+                <ProductGrid products={list.slice(0, limit)} />
+                {list.length > limit && (
+                  <div className="mt-10 text-center">
+                    <button type="button" onClick={() => setLimit((n) => n + PAGE)} className="btn-ghost">
+                      Show more ({list.length - limit} left) <ChevronDown className="w-4 h-4" />
+                    </button>
+                  </div>
+                )}
+              </>
             ) : (
               <div className="border border-dashed border-line py-20 px-6 text-center">
                 <SearchX className="w-10 h-10 mx-auto text-mute" strokeWidth={1.25} />
