@@ -3,7 +3,8 @@ import { sendContactEmail } from '../services/emailService.js';
 
 export async function submitContact(req, res) {
   // Honeypot: real users never see or fill this field. Pretend success to bots.
-  if (req.body && typeof req.body.website === 'string' && req.body.website.trim() !== '') {
+  if (req.body && typeof req.body.contact_hp === 'string' && req.body.contact_hp.trim() !== '') {
+    console.warn('[contact] spam trap field was filled (browser autofill or a bot) — message ignored, no email sent');
     return res.status(200).json({ success: true, message: 'Thanks! Your message has been sent.' });
   }
 
@@ -13,7 +14,8 @@ export async function submitContact(req, res) {
   }
 
   try {
-    await sendContactEmail(values);
+    const info = await sendContactEmail(values);
+    console.log('[contact] email handed to Gmail:', { to: info.envelope?.to, accepted: info.accepted, rejected: info.rejected, response: info.response });
     return res.status(200).json({ success: true, message: 'Thanks! Your message has been sent.' });
   } catch (err) {
     console.error('[contact] email failed:', err.code || '', err.message);

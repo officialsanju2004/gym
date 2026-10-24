@@ -29,7 +29,7 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
   const isPage = variant === 'page';
   const {
     register, handleSubmit, reset, setError, formState: { errors, isSubmitting },
-  } = useForm({ defaultValues: { name: '', email: '', phone: '', subject: '', product: '', message: '', website: '' } });
+  } = useForm({ defaultValues: { name: '', email: '', phone: '', subject: '', product: '', message: '', contact_hp: '' } });
   const [status, setStatus] = useState({ type: 'idle', text: '' }); // idle | success | error
   const lock = useRef(false); // synchronous guard against double submits
 
@@ -69,7 +69,7 @@ export default function ContactForm({ variant = 'page', idPrefix = 'cf' }) {
     <form onSubmit={handleSubmit(onSubmit)} noValidate className="space-y-5" aria-label="Contact form">
       {/* Honeypot — hidden from people and assistive tech */}
       <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
-        <label>Leave this field empty<input type="text" tabIndex={-1} autoComplete="off" {...register('website')} /></label>
+        <label>Leave this field empty<input type="text" tabIndex={-1} autoComplete="off" {...register('contact_hp')} /></label>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2">

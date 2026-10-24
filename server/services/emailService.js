@@ -49,7 +49,7 @@ export async function sendContactEmail(data) {
     data.message,
   ].join('\n');
 
-  await getTransporter().sendMail({
+  return getTransporter().sendMail({
     from: `"Website Enquiries" <${env.gmailUser}>`,
     to: env.contactReceiver, // always the owner's inbox, never customer-supplied
     replyTo: `"${data.name.replace(/"/g, '')}" <${data.email}>`,

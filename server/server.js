@@ -28,7 +28,7 @@ app.get('/', (_req, res) => {
   });
 });
 
-app.use('/api', apiLimiter);
+
 
 app.get('/api/health', (_req, res) => {
   res.json({
