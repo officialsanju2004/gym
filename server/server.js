@@ -13,10 +13,7 @@ app.set('trust proxy', 1);
 app.use(helmet());
 
 app.use(
-  cors({
-    origin: env.clientUrl.split(',').map((s) => s.trim()),
-    methods: ['POST', 'GET'],
-  })
+  cors()
 );
 
 app.use(express.json({ limit: '20kb' }));
