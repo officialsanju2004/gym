@@ -21,6 +21,16 @@ app.use(
 
 app.use(express.json({ limit: '20kb' }));
 
+// Root route: open the server URL in a browser to confirm it is deployed and running.
+app.get('/', (_req, res) => {
+  res.json({
+    ok: true,
+    service: 'Punjabi Tadka Nutrition API',
+    emailConfigured: isEmailConfigured(),
+    time: new Date().toISOString(),
+  });
+});
+
 app.use('/api', apiLimiter);
 
 app.get('/api/health', (_req, res) => {
@@ -55,5 +65,10 @@ app.use((err, _req, res, _next) => {
     message: 'Something went wrong.',
   });
 });
+
+// Local / VPS: start listening. On Vercel the app is exported and Vercel runs it, so we must not listen there.
+if (!process.env.VERCEL) {
+  app.listen(env.port, () => console.log(`API running on http://localhost:${env.port}`));
+}
 
 export default app;
