@@ -4,7 +4,7 @@ import { ArrowDown, ArrowRight, Globe2, BadgeIndianRupee, Target, Phone, Dumbbel
 import SectionHeading from '../components/SectionHeading';
 import Reveal from '../components/Reveal';
 import ProductCard from '../components/ProductCard';
-import LogoImage from '../components/LogoImage';
+import Scene from '../components/Scenes';
 import ProductImage from '../components/ProductImage';
 import ContactForm from '../components/ContactForm';
 import WhatsAppIcon from '../components/WhatsAppIcon';
@@ -66,7 +66,7 @@ function Hero() {
         </div>
 
         <motion.div style={{ y: yArt }} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.2 }} className="order-first lg:order-none mx-auto w-full max-w-[300px] sm:max-w-[440px] lg:max-w-[600px] lg:justify-self-end">
-          <LogoImage eager sizes="(min-width:1024px) 600px, (min-width:640px) 440px, 300px" />
+          <Scene name="hero" className="h-auto w-full" />
         </motion.div>
       </div>
 
@@ -145,7 +145,10 @@ export default function Home() {
 
       <section className="py-24 lg:py-32">
         <div className="container-x grid gap-14 lg:grid-cols-[1fr_1.2fr] lg:gap-24">
-          <SectionHeading title="Why choose us" text="Choosing supplements can be confusing. We keep it simple and honest." className="lg:sticky lg:top-32 self-start" />
+          <div className="lg:sticky lg:top-32 self-start">
+            <SectionHeading title="Why choose us" text="Choosing supplements can be confusing. We keep it simple and honest." />
+            <Reveal delay={0.1} className="mt-8 max-w-[360px]"><Scene name="why" className="h-auto w-full" /></Reveal>
+          </div>
           <ol className="divide-y divide-line border-y border-line">
             {reasons.map(([t, d], i) => (
               <Reveal as="li" key={t} delay={i * 0.06} className="py-8 grid sm:grid-cols-[minmax(0,.9fr)_1.1fr] gap-3 sm:gap-8">
@@ -160,7 +163,7 @@ export default function Home() {
       <section className="border-y border-line bg-coal overflow-hidden">
         <div className="container-x grid lg:grid-cols-2 items-center gap-12 py-24">
           <Reveal className="relative max-w-[440px] w-full mx-auto lg:mx-0">
-            <LogoImage sizes="(min-width:1024px) 440px, 90vw" />
+            <Scene name="story" className="h-auto w-full" />
           </Reveal>
           <Reveal>
             <h2 className="text-5xl sm:text-6xl">Punjabi power, in a tub</h2>
@@ -201,6 +204,7 @@ export default function Home() {
                 <a href={site.contact.phoneHref} className="btn-primary"><Phone className="w-4 h-4" /> {site.contact.phone}</a>
                 <Link to="/contact" className="btn-ghost">Contact page</Link>
               </div>
+              <Scene name="enquiry" className="mt-10 hidden h-auto w-full max-w-[380px] sm:block" />
             </Reveal>
             <Reveal delay={0.1} className="bg-coal border border-line p-6 sm:p-9">
               <h3 className="text-3xl mb-6">Send us an enquiry</h3>

@@ -66,6 +66,12 @@ export default function Footer() {
         <div className="container-x pb-8 text-xs text-mute/80 leading-relaxed">
           <p>Supplements are not a substitute for a varied diet or for medical advice. Always read the label, and speak to a doctor or pharmacist before use if you are pregnant, breastfeeding, under 18, on medication or have a medical condition.</p>
         </div>
+        <div className="container-x pb-8 text-sm text-mute">
+          <p>
+            Developed and managed by{' '}
+            <a href="https://growthflowmedia.com/" target="_blank" rel="noopener noreferrer" className="font-semibold text-gold hover:text-white transition-colors">Growth flow media</a>
+          </p>
+        </div>
       </div>
     </footer>
   );

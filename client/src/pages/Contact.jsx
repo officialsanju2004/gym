@@ -2,6 +2,7 @@ import { Phone, Mail, Clock, MapPin, ExternalLink } from 'lucide-react';
 import ContactForm from '../components/ContactForm';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import Reveal from '../components/Reveal';
+import Scene from '../components/Scenes';
 import { site, mapsEmbedUrl, mapsLinkUrl } from '../config/site';
 import { useSEO } from '../hooks/useSEO';
 import { openWhatsApp, generalMessage } from '../utils/whatsapp';
@@ -48,6 +49,7 @@ export default function Contact() {
                 </li>
               ))}
             </ul>
+            <Scene name="pin" className="mx-auto mt-10 hidden h-auto w-full max-w-[340px] lg:block" />
           </Reveal>
           <Reveal delay={0.08} className="bg-coal border border-line p-6 sm:p-10">
             <h2 className="text-4xl mb-7">Send a message</h2>

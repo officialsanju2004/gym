@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Sprout, Dumbbell, Users, Building2, Trophy, Target, Eye, Handshake, ShieldCheck, Gem, Lightbulb } from 'lucide-react';
 import SectionHeading from '../components/SectionHeading';
 import Reveal from '../components/Reveal';
-import LogoImage from '../components/LogoImage';
+import Scene from '../components/Scenes';
 import WhatsAppIcon from '../components/WhatsAppIcon';
 import { site } from '../config/site';
 import { useSEO } from '../hooks/useSEO';
@@ -35,13 +35,16 @@ export default function About() {
             <h1 className="text-6xl sm:text-8xl lg:text-[8.5rem]">Fuel worth training on.</h1>
             <p className="mt-8 text-mute text-lg max-w-xl leading-relaxed">{site.brand} supplies gym supplements to people and gyms in and around Ferozepur who take training seriously.</p>
           </div>
-          <LogoImage eager className="mx-auto max-w-[320px] sm:max-w-[420px] lg:max-w-[460px]" sizes="(min-width:1024px) 460px, 420px" />
+          <Scene name="about" className="mx-auto h-auto w-full max-w-[320px] sm:max-w-[420px] lg:max-w-[460px]" />
         </div>
       </section>
 
       <section className="py-24">
         <div className="container-x grid gap-12 lg:grid-cols-[1fr_1.3fr] lg:gap-24">
-          <SectionHeading title="Our story" />
+          <div>
+            <SectionHeading title="Our story" />
+            <Reveal delay={0.1} className="mt-8 max-w-[420px]"><Scene name="store" className="h-auto w-full" /></Reveal>
+          </div>
           <Reveal className="space-y-5 text-lg text-mute leading-relaxed">
             {site.story.map((s) => <p key={s}>{s}</p>)}
           </Reveal>

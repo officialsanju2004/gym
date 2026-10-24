@@ -2,6 +2,7 @@ import { useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search, X, SearchX, Info, ChevronDown } from 'lucide-react';
 import ProductGrid from '../components/ProductGrid';
+import Scene from '../components/Scenes';
 import { products, categories, countByCategory, PRICE_NOTE, PREWORKOUT_NOTE } from '../data/products';
 import { useSEO } from '../hooks/useSEO';
 
@@ -54,8 +55,9 @@ export default function Supplements() {
 
   return (
     <>
-      <section className="pt-36 pb-12 border-b border-line knurl">
-        <div className="container-x">
+      <section className="relative overflow-hidden pt-36 pb-12 border-b border-line knurl">
+        <Scene name="shelf" className="pointer-events-none absolute -right-10 bottom-0 hidden h-auto w-[620px] opacity-90 lg:block xl:right-6" />
+        <div className="container-x relative">
           <h1 className="text-6xl sm:text-8xl lg:text-9xl">Supplements</h1>
           <p className="mt-5 text-mute text-lg max-w-xl leading-relaxed">All {products.length} products from our price list: protein, gainers, creatine, pre-workout, amino acids, vitamins and oats. Open a product for details, or message us to buy.</p>
         </div>

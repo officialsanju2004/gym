@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import LogoImage from '../components/LogoImage';
+import Scene from '../components/Scenes';
 import { useSEO } from '../hooks/useSEO';
 
 export default function NotFound({ what = 'page' }) {
@@ -7,8 +7,8 @@ export default function NotFound({ what = 'page' }) {
   return (
     <section className="min-h-[80vh] grid place-items-center pt-24 px-5 text-center">
       <div>
-        <LogoImage className="mx-auto max-w-[180px] -mb-2" sizes="180px" />
-        <p className="font-display font-black text-[7rem] leading-none text-flame">404</p>
+        <Scene name="empty" className="mx-auto h-auto w-full max-w-[320px]" />
+        <p className="font-display font-black text-[5rem] leading-none text-flame">404</p>
         <h1 className="text-5xl mt-2">That {what} does not exist</h1>
         <p className="mt-4 text-mute">The link may be old or mistyped.</p>
         <div className="mt-8 flex gap-3 justify-center flex-wrap">
