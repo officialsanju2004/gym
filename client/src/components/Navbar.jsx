@@ -70,18 +70,18 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -12 }}
             transition={{ duration: 0.22 }}
-            className="md:hidden fixed inset-x-0 top-[72px] bottom-0 bg-ink px-5 pt-6 pb-24 overflow-y-auto"
+            className="md:hidden absolute inset-x-0 top-full bg-ink border-b border-line px-5 pt-2 pb-6"
           >
             <nav aria-label="Mobile" className="flex flex-col">
               {nav.map((n, i) => (
                 <motion.div key={n.to} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.05 * i }}>
-                  <NavLink to={n.to} end={n.to === '/'} className={({ isActive }) => `block py-4 border-b border-line font-display font-extrabold text-4xl uppercase ${isActive ? 'text-gold' : 'text-white'}`}>
+                  <NavLink to={n.to} end={n.to === '/'} className={({ isActive }) => `block py-3.5 border-b border-line font-display font-extrabold text-3xl uppercase ${isActive ? 'text-gold' : 'text-white'}`}>
                     {n.label}
                   </NavLink>
                 </motion.div>
               ))}
             </nav>
-            <Link to="/supplements" className="btn-primary w-full mt-8">Shop Supplements</Link>
+            <Link to="/supplements" className="btn-primary w-full mt-6">Shop Supplements</Link>
             <a href={site.contact.phoneHref} className="btn-ghost w-full mt-3"><Phone className="w-4 h-4" /> Call {site.contact.phone}</a>
           </motion.div>
         )}

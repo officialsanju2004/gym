@@ -49,23 +49,24 @@ function Hero() {
       <div className="absolute inset-x-0 bottom-0 h-2/3 bg-[radial-gradient(ellipse_at_80%_100%,rgba(229,9,11,.28),transparent_60%)]" aria-hidden="true" />
 
       <div className="container-x relative grid items-center gap-8 lg:grid-cols-[1.05fr_1fr] lg:gap-6">
-        <div>
-          <h1 className="text-[clamp(3.4rem,10.5vw,8.25rem)]">
+        {/* On mobile this wrapper is "contents" so heading, image, paragraph and buttons can be ordered individually */}
+        <div className="contents lg:block">
+          <h1 className="order-1 text-center lg:text-left text-[clamp(3.4rem,10.5vw,8.25rem)]">
             {line('Fuel your', 0.1)}
             {line('body.', 0.2)}
             {line('Feed your', 0.3, 'text-gold')}
             {line('dreams.', 0.4, 'text-gold')}
           </h1>
-          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="mt-7 max-w-md text-lg text-mute leading-relaxed">
+          <motion.p initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.8 }} className="order-3 mt-0 lg:mt-7 max-w-md mx-auto lg:mx-0 text-center lg:text-left text-lg text-mute leading-relaxed">
             {site.brand} sells protein, creatine, pre-workout, gainers and everyday wellness products, with the price on every product. Browse the range, then call or message us.
           </motion.p>
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95 }} className="mt-8 flex flex-wrap gap-3">
+          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.95 }} className="order-4 mt-0 lg:mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
             <Link to="/supplements" className="btn-primary">Shop Supplements <ArrowRight className="w-4 h-4" /></Link>
             <a href={site.contact.phoneHref} className="btn-ghost"><Phone className="w-4 h-4" /> {site.contact.phone}</a>
           </motion.div>
         </div>
 
-        <motion.div style={{ y: yArt }} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.2 }} className="order-first lg:order-none mx-auto w-full max-w-[300px] sm:max-w-[440px] lg:max-w-[600px] lg:justify-self-end">
+        <motion.div style={{ y: yArt }} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.9, delay: 0.2 }} className="order-2 lg:order-none mx-auto w-full max-w-[300px] sm:max-w-[440px] lg:max-w-[600px] lg:justify-self-end">
           <Scene name="hero" className="h-auto w-full" />
         </motion.div>
       </div>
@@ -169,7 +170,7 @@ export default function Home() {
             <h2 className="text-5xl sm:text-6xl">Punjabi power, in a tub</h2>
             <p className="mt-6 text-mute text-lg leading-relaxed max-w-lg">{site.story[0]}</p>
             <p className="mt-4 text-mute leading-relaxed max-w-lg">{site.brand}, Kaccha Zira Road, Near Dana Mandi, Ferozepur City.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="order-4 mt-0 lg:mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
               <Link to="/about" className="btn-ghost">Discover our story <ArrowRight className="w-4 h-4" /></Link>
               <Link to="/contact" className="btn-primary">Find the shop</Link>
             </div>
@@ -199,7 +200,7 @@ export default function Home() {
             <Reveal>
               <h2 className="text-5xl sm:text-7xl">Not sure what to take? Call or message us.</h2>
               <p className="mt-6 text-mute text-lg max-w-md leading-relaxed">Tell us what you are training for and any dietary needs. We will come back with options.</p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <div className="order-4 mt-0 lg:mt-8 flex flex-wrap justify-center lg:justify-start gap-3">
                 <button type="button" onClick={() => openWhatsApp(generalMessage())} className="btn-wa"><WhatsAppIcon className="w-5 h-5" /> Enquire on WhatsApp</button>
                 <a href={site.contact.phoneHref} className="btn-primary"><Phone className="w-4 h-4" /> {site.contact.phone}</a>
                 <Link to="/contact" className="btn-ghost">Contact page</Link>
