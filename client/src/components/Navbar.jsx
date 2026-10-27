@@ -3,11 +3,13 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X, Phone } from 'lucide-react';
 import Logo from './Logo';
+import NavSearch from './NavSearch';
 import { nav, site } from '../config/site';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
@@ -17,7 +19,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', on);
   }, []);
 
-  useEffect(() => setOpen(false), [pathname]);
+  useEffect(() => { setOpen(false); setSearchOpen(false); }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
@@ -26,14 +28,14 @@ export default function Navbar() {
     return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = ''; };
   }, [open]);
 
-  const solid = scrolled || open;
+  const solid = scrolled || open || searchOpen;
 
   return (
     <header className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${solid ? 'bg-ink/95 backdrop-blur border-b border-line' : 'bg-transparent border-b border-transparent'}`}>
       <div className="container-x flex h-[72px] items-center justify-between">
         <Link to="/" aria-label={`${site.brand} — Home`} className="relative z-10"><Logo /></Link>
 
-        <nav aria-label="Primary" className="hidden md:flex items-center gap-9">
+        <nav aria-label="Primary" className="hidden md:flex items-center gap-7 xl:gap-9">
           {nav.map((n) => (
             <NavLink key={n.to} to={n.to} end={n.to === '/'} className={({ isActive }) => `relative py-2 text-sm font-semibold transition-colors ${isActive ? 'text-white' : 'text-mute hover:text-white'}`}>
               {({ isActive }) => (
@@ -46,20 +48,20 @@ export default function Navbar() {
           ))}
         </nav>
 
-        <div className="hidden md:block">
-          <Link to="/supplements" className="btn-primary !min-h-11">Shop Supplements</Link>
+        <div className="flex items-center gap-1 lg:gap-3">
+          <NavSearch panelOpen={searchOpen} setPanelOpen={(v) => { setSearchOpen(v); if (v) setOpen(false); }} />
+          <Link to="/supplements" className="btn-primary !min-h-11 hidden md:inline-flex">Shop Supplements</Link>
+          <button
+            type="button"
+            className="md:hidden relative z-10 grid place-items-center w-11 h-11 -mr-2"
+            aria-label={open ? 'Close menu' : 'Open menu'}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            onClick={() => { setOpen((v) => !v); setSearchOpen(false); }}
+          >
+            {open ? <X /> : <Menu />}
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="md:hidden relative z-10 grid place-items-center w-11 h-11 -mr-2"
-          aria-label={open ? 'Close menu' : 'Open menu'}
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          {open ? <X /> : <Menu />}
-        </button>
       </div>
 
       <AnimatePresence>
